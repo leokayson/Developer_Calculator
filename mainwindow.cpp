@@ -23,9 +23,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
-    QRegExpValidator *hexValidator = new QRegExpValidator(*new QRegExp("[0-9A-Fa-fx+\\-*/><&!^| ]{0,16}"), this);
-    QRegExpValidator *decValidator = new QRegExpValidator(*new QRegExp("[0-9+\\-*/><&!^| ]{0,19}"), this);
-    QRegExpValidator *binValidator = new QRegExpValidator(*new QRegExp("[01b+\\-*/><&!^| ]{0,64}"), this);
+    // 16 words + 1 operator + 2 delimiter spaces at most + 4 prefixes + 5 chars redundancies
+    QRegExpValidator *hexValidator = new QRegExpValidator(*new QRegExp("[0-9A-Fa-fx+\\-*/><&!^| ]{0,31}"), this);
+    // 20 words + 1 operator + 6 delimiter chars at most + 0 prefixes + 5 characters redundancies
+    QRegExpValidator *decValidator = new QRegExpValidator(*new QRegExp("[0-9+\\-*/><&!^|,]{0,32}"), this);
+    // 64 words + 1 operator + 14 delimiter chars at most + 4 prefixes + 5 characters redundancies
+    QRegExpValidator *binValidator = new QRegExpValidator(*new QRegExp("[01b+\\-*/><&!^| ]{0,88}"), this);
     ui->HexText->setValidator(hexValidator);
     ui->DecText->setValidator(decValidator);
     ui->BinText->setValidator(binValidator);
@@ -41,6 +44,7 @@ void MainWindow::initUI()
 
     connect(ui->PrefixCB, &QCheckBox::stateChanged, cTool, &CalcTool::formatOutput);
     connect(ui->DelimiterCB, &QCheckBox::stateChanged, cTool, &CalcTool::formatOutput);
+    connect(ui->FixLenCB, &QCheckBox::stateChanged, cTool, &CalcTool::formatOutput);
 
     connect(ui->ClearBnt, &QPushButton::clicked, cTool, &CalcTool::clearOutput);
 }

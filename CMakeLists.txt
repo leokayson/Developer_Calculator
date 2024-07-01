@@ -46,7 +46,6 @@ else()
             CalcTool.h CalcTool.cpp
             calcmath.h calcmath.cpp
             proj_conf.h
-
         )
     endif()
 
@@ -70,6 +69,8 @@ set_target_properties(dev_calc PROPERTIES
 )
 
 include(GNUInstallDirs)
+set(INSTALL_DIR "${CMAKE_BINARY_DIR}/bin")
+message(STATUS, "CMAKE_BINARY_DIR is ${CMAKE_BINARY_DIR}")
 install(TARGETS dev_calc
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

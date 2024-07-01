@@ -30,7 +30,7 @@ private:
     void declimateArray(QString baseStr, std::array<QString, 3> &temArr);
     void declimateText(QString &text, const uint8_t decLen, const QChar decChar);
     void prefixArray(QString baseStr, std::array<QString, 3> &temArr);
-    void prefixText(QString &text, const uint8_t decLen, const QChar decChar);
+    void fixLenArray(QString baseStr, std::array<QString, 3> &temArr);
     void errorOccur();
     void spiltText(QString& newText, std::array<QString, 3> &arr);
     bool updating = false;

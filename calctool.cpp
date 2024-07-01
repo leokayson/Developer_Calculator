@@ -6,9 +6,9 @@ CalcTool::CalcTool(Ui::DevCalcWindow *ui, QObject *parent)
     this->decOriTextArr = {"0", "", ""};
     this->binOriTextArr = {"0", "", ""};
     this->validOp = {'+', '-', '*', '/', '^', '&', '|', '!', '>', '<'};
-    this->ctConfigs.insert("hex", {{ { "base", "16" }, { "delimiterLen", "4" }, { "delimiterChar", " " }, { "prefix", "0x" } }});
-    this->ctConfigs.insert("dec", {{ { "base", "10" }, { "delimiterLen", "3" }, { "delimiterChar", "," }, { "prefix", "" } }});
-    this->ctConfigs.insert("bin", {{ { "base", "2" }, { "delimiterLen", "4" }, { "delimiterChar", " " }, { "prefix", "0b" } }});
+    this->ctConfigs.insert("hex", {{ { "base", "16" }, { "delimiterLen", "4" }, { "delimiterChar", " " }, { "prefix", "0x" } , { "fixLen", "8" } }});
+    this->ctConfigs.insert("dec", {{ { "base", "10" }, { "delimiterLen", "3" }, { "delimiterChar", "," }, { "prefix", "" }, { "fixLen", "0" }  }});
+    this->ctConfigs.insert("bin", {{ { "base", "2" }, { "delimiterLen", "4" }, { "delimiterChar", " " }, { "prefix", "0b" }, { "fixLen", "32" }  }});
 }
 
 CalcTool::~CalcTool() { delete ui; };
@@ -146,6 +146,14 @@ void CalcTool::formatOutput(bool outputHistory) {
     std::array<QString, 3> decTempArr = decOriTextArr;
     std::array<QString, 3> binTempArr = binOriTextArr;
 
+    if (ui->FixLenCB->isChecked()) {
+#ifdef DEBUG_MODE
+        qDebug() << "FixLenCB isChecked";
+#endif
+        fixLenArray("hex", hexTempArr);
+        fixLenArray("dec", decTempArr);
+        fixLenArray("bin", binTempArr);
+    }
     if (ui->DelimiterCB->isChecked()) {
 #ifdef DEBUG_MODE
         qDebug() << "DelimiterCB isChecked";
@@ -181,6 +189,16 @@ void CalcTool::formatOutput(bool outputHistory) {
 #ifdef DEBUG_MODE
     qDebug() << "================";
 #endif
+}
+
+void CalcTool::fixLenArray(QString baseStr, std::array<QString, 3> &temArr) {
+    uint fixLen = ctConfigs[baseStr]["fixLen"].toUInt();
+    if (temArr[0].length() < fixLen) {
+        temArr[0] = temArr[0].rightJustified(fixLen, '0');;
+    }
+    if (temArr[2] != "" && temArr[2].length() < fixLen) {
+        temArr[2] = temArr[2].rightJustified(fixLen, '0');;
+    }
 }
 
 void CalcTool::declimateArray(QString baseStr, std::array<QString, 3> &temArr) {
