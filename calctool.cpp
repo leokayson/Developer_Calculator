@@ -20,6 +20,7 @@ void CalcTool::onHexTextChange(const QString &text) {
     updating = true;
     int cp = ui->HexText->cursorPosition();
     handleTextChange(text, 16);
+    // TODO: fix this bug - the position of the cursor is not what is expected when fixLen clicked.
     ui->HexText->setCursorPosition(cp);
     updating = false;
 }
@@ -31,6 +32,7 @@ void CalcTool::onDecTextChange(const QString &text) {
     updating = true;
     int cp = ui->DecText->cursorPosition();
     handleTextChange(text, 10);
+    // TODO: fix this bug - the position of the cursor is not what is expected when fixLen clicked.
     ui->DecText->setCursorPosition(cp);
     updating = false;
 }
@@ -42,6 +44,7 @@ void CalcTool::onBinTextChange(const QString &text) {
     updating = true;
     int cp = ui->BinText->cursorPosition();
     handleTextChange(text, 2);
+    // TODO: fix this bug - the position of the cursor is not what is expected when fixLen clicked.
     ui->BinText->setCursorPosition(cp);
     updating = false;
 }
