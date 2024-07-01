@@ -9,6 +9,7 @@ QString CalcMath::baseConversion(const QString &num, int ori_base,
     }
     bool ok = true;
     qlonglong ori_num = num.toLongLong(&ok, ori_base);
+
     if (!ok) {
         return ("ERROR");
     }
@@ -54,8 +55,12 @@ QString CalcMath::calculate(const QString &num1, const QString &num2,
         res = numL1 | numL2;
         break;
     }
-    case((ushort)'!'): {
-        res = !numL2;
+    // '!' just to avoid confusion, the role in the calculator is the same as '~'
+    case((ushort)'!'):
+    case((ushort)'~'): {
+        int bitWidth = numL2 == 0 ? 1 : static_cast<int>(std::log2(numL2) + 1);
+        int bitMask = (1 << bitWidth) - 1;
+        res = (~numL2) & bitMask;
         break;
     }
     case((ushort)'>'): {
