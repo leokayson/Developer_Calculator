@@ -1,9 +1,0 @@
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/dev_calc.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/edit_cache.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/rebuild_cache.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/list_install_components.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/install.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/install/local.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/install/strip.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/dev_calc_autogen_timestamp_deps.dir
-D:/Code/qt_proj/dev_calc/build/Debug/CMakeFiles/dev_calc_autogen.dir
