@@ -8,5 +8,8 @@ If you have only suggestions or questions, please feel free to put them in Issue
 
 Open this project in QT Creator & build & run
 
+-------
+
 Usage:
-![Basic Usage](examples\\Basic_usage.png "Basic Usage")
+
+<img src="examples/Basic_usage.png" alt="Basic_usage" width="600" height="350">
