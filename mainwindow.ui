@@ -17,7 +17,11 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Developer Calculator</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>calc_icon.ico</normaloff>calc_icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow
@@ -243,8 +247,14 @@ QLineEdit:hover
     <property name="text">
      <string notr="true" extracomment="Hex value"/>
     </property>
+    <property name="cursorPosition">
+     <number>0</number>
+    </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="cursorMoveStyle">
+     <enum>Qt::LogicalMoveStyle</enum>
     </property>
    </widget>
    <widget class="QLabel" name="DecLabel">
@@ -285,7 +295,7 @@ QLineEdit:hover
    </property>
    <widget class="QMenu" name="menuDeveloper">
     <property name="title">
-     <string>Developer Calculator</string>
+     <string>Calculator for SW Developer -- Developed by Kayson</string>
     </property>
    </widget>
    <addaction name="menuDeveloper"/>

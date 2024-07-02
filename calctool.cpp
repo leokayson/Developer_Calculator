@@ -18,10 +18,10 @@ void CalcTool::onHexTextChange(const QString &text) {
         return;
     }
     updating = true;
-    int cp = ui->HexText->cursorPosition();
+    // Make cursorPoint count from the right
+    int cp = ui->HexText->displayText().length() - ui->HexText->cursorPosition();
     handleTextChange(text, 16);
-    // TODO: fix this bug - the position of the cursor is not what is expected when fixLen clicked.
-    ui->HexText->setCursorPosition(cp);
+    ui->HexText->setCursorPosition(ui->HexText->displayText().length() - cp);
     updating = false;
 }
 
@@ -30,10 +30,10 @@ void CalcTool::onDecTextChange(const QString &text) {
         return;
     }
     updating = true;
-    int cp = ui->DecText->cursorPosition();
+    // Make cursorPoint count from the right
+    int cp = ui->DecText->displayText().length() - ui->DecText->cursorPosition();
     handleTextChange(text, 10);
-    // TODO: fix this bug - the position of the cursor is not what is expected when fixLen clicked.
-    ui->DecText->setCursorPosition(cp);
+    ui->DecText->setCursorPosition(ui->DecText->displayText().length() - cp);
     updating = false;
 }
 
@@ -42,10 +42,10 @@ void CalcTool::onBinTextChange(const QString &text) {
         return;
     }
     updating = true;
-    int cp = ui->BinText->cursorPosition();
+    // Make cursorPoint count from the right
+    int cp = ui->BinText->displayText().length() - ui->BinText->cursorPosition();
     handleTextChange(text, 2);
-    // TODO: fix this bug - the position of the cursor is not what is expected when fixLen clicked.
-    ui->BinText->setCursorPosition(cp);
+    ui->BinText->setCursorPosition(ui->BinText->displayText().length() - cp);
     updating = false;
 }
 
@@ -232,7 +232,7 @@ void CalcTool::formatOutput(bool outputHistory) {
         ui->HistoryText->appendPlainText(history);
     }
 
-    ui->HexText->setText(hexStr);
+    ui->HexText->setText(hexStr.toUpper().replace("X","x"));
     ui->DecText->setText(decStr);
     ui->BinText->setText(binStr);
 #ifdef DEBUG_MODE

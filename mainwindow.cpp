@@ -3,6 +3,8 @@
 
 #include <QRegExp>
 #include <QRegExpValidator>
+#include <QFileInfo>
+
 
 #define CONNECTTEXTCHANGE(name) connect(ui->##name##Text, &QLineEdit::textChanged, cTool, &CalcTool::on##name##TextChange);
 
@@ -13,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
     ui->setupUi(this);
+    this->setWindowTitle("Developer Calculator");
+    this->setWindowIcon(QIcon(QFileInfo(__FILE__).absolutePath() + "/icons/calc_icon.ico"));
     initUI();
 }
 
