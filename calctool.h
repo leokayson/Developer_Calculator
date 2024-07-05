@@ -22,6 +22,8 @@ public slots:
     void onDecTextChange(const QString &decText);
     void onBinTextChange(const QString &binText);
     void calculateOutput();
+    void fixLen8Output();
+    void fixLen16Output();
     void formatOutput(bool outputHistory = false);
     void clearOutput();
 

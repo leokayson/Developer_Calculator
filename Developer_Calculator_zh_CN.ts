@@ -51,7 +51,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="298"/>
+        <location filename="mainwindow.ui" line="296"/>
+        <source>Fix len in 16 Bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="311"/>
         <source>Calculator for SW Developer -- Developed by Kayson</source>
         <oldsource>Calculator for SW Developer</oldsource>
         <translation type="unfinished"></translation>

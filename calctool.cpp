@@ -1,5 +1,7 @@
 #include "CalcTool.h"
 
+#define SET_CTCONFIGS(top_key, sub_key, value) ctConfigs[top_key][sub_key] = value
+
 CalcTool::CalcTool(Ui::DevCalcWindow *ui, QObject *parent)
     : QObject(parent), ui(ui) {
     this->hexOriTextArr = {"0", "", ""};
@@ -132,6 +134,29 @@ void CalcTool::calculateOutput() {
     updating = false;
 }
 
+void CalcTool::fixLen8Output() {
+    if (updating) {
+        return;
+    }
+    updating = true;
+    ui->FixLen16CB->setChecked(false);
+    SET_CTCONFIGS("hex", "fixLen", "8");
+    SET_CTCONFIGS("bin", "fixLen", "32");
+    formatOutput(false);
+    updating = false;
+}
+void CalcTool::fixLen16Output() {
+    if (updating) {
+        return;
+    }
+    updating = true;
+    ui->FixLen8CB->setChecked(false);
+    ctConfigs["hex"]["fixLen"] = "16";
+    ctConfigs["bin"]["fixLen"] = "64";
+    formatOutput(false);
+    updating = false;
+}
+
 void CalcTool::fixLenArray(QString baseStr, std::array<QString, 3> &temArr) {
     uint fixLen = ctConfigs[baseStr]["fixLen"].toUInt();
     if (temArr[0].length() < fixLen) {
@@ -195,7 +220,7 @@ void CalcTool::formatOutput(bool outputHistory) {
     std::array<QString, 3> decTempArr = decOriTextArr;
     std::array<QString, 3> binTempArr = binOriTextArr;
 
-    if (ui->FixLenCB->isChecked()) {
+    if (ui->FixLen8CB->isChecked() || ui->FixLen16CB->isChecked()) {
 #ifdef DEBUG_MODE
         qDebug() << "FixLenCB isChecked";
 #endif
