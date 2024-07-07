@@ -1,10 +1,10 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include <QRegExp>
 #include <QRegExpValidator>
 #include <QFileInfo>
-
+#include <QDir>
 
 #define CONNECTTEXTCHANGE(name) connect(ui->##name##Text, &QLineEdit::textChanged, cTool, &CalcTool::on##name##TextChange);
 
@@ -14,9 +14,14 @@ MainWindow::MainWindow(QWidget *parent)
     , cTool(new CalcTool(ui, this))
 
 {
+    // QFileInfo fileInfo(__FILE__);
+    QDir projectRootDir = QDir(QFileInfo(__FILE__).absolutePath());
+    projectRootDir.cdUp();
+
     ui->setupUi(this);
     this->setWindowTitle("Developer Calculator");
-    this->setWindowIcon(QIcon(QFileInfo(__FILE__).absolutePath() + "/icons/calc_icon.ico"));
+    this->setWindowIcon(QIcon(projectRootDir.path() + "/icons/calc_icon.ico"));
+
     initUI();
 }
 

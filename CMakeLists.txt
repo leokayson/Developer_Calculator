@@ -9,17 +9,20 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_AUTOUIC ON)
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 
-set(TS_FILES Developer_Calculator_zh_CN.ts)
+include_directories(${CMAKE_SOURCE_DIR}/inc)
+include_directories(${CMAKE_SOURCE_DIR}/ui)
+
+list(APPEND CMAKE_AUTOUIC_SEARCH_PATHS "ui")
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-        ${TS_FILES}
+        src/main.cpp
+        src/mainwindow.cpp
+        inc/mainwindow.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -32,24 +35,16 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR})
 else()
-    if(ANDROID)
-        add_library(Developer_Calculator SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(Developer_Calculator
-            ${PROJECT_SOURCES}
-            CalcTool.h CalcTool.cpp
-            calcmath.h calcmath.cpp
-            proj_conf.h
-        )
-    endif()
-
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    add_executable(Developer_Calculator
+        ${UI_HEADERS}
+        ${PROJECT_SOURCES}
+        inc/CalcTool.h
+        src/CalcTool.cpp
+        inc/calcmath.h
+        src/calcmath.cpp
+        inc/proj_conf.h)
 endif()
 
 target_link_libraries(Developer_Calculator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
@@ -69,8 +64,9 @@ set_target_properties(Developer_Calculator PROPERTIES
 )
 
 include(GNUInstallDirs)
-set(INSTALL_DIR "${CMAKE_BINARY_DIR}/bin")
-message(STATUS, "CMAKE_BINARY_DIR is ${CMAKE_BINARY_DIR}")
+
+set(INSTALL_DIR ${CMAKE_BINARY_DIR}/bin)
+
 install(TARGETS Developer_Calculator
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
