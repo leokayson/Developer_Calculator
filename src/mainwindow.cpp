@@ -32,12 +32,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
-    // 16 words + 1 operator + 2 delimiter spaces at most + 4 prefixes + 5 chars redundancies
-    QRegExpValidator *hexValidator = new QRegExpValidator(*new QRegExp("[0-9A-Fa-fx+\\-*/><&!^~| ]"), this);
-    // 20 words + 1 operator + 6 delimiter chars at most + 0 prefixes + 5 characters redundancies
-    QRegExpValidator *decValidator = new QRegExpValidator(*new QRegExp("[0-9+\\-*/><&!^~|,]"), this);
-    // 64 words + 1 operator + 14 delimiter chars at most + 4 prefixes + 5 characters redundancies
-    QRegExpValidator *binValidator = new QRegExpValidator(*new QRegExp("[01b+\\-*/><&!^~| ]"), this);
+    QRegExpValidator *hexValidator = new QRegExpValidator(*new QRegExp("[(0x)0-9A-Fa-f+\\-*/><&!^~| ]+"), this);
+    QRegExpValidator *decValidator = new QRegExpValidator(*new QRegExp("[0-9+\\-*/><&!^~|,]+"), this);
+    QRegExpValidator *binValidator = new QRegExpValidator(*new QRegExp("[(0b)01+\\-*/><&!^~| ]+"), this);
     ui->HexText->setValidator(hexValidator);
     ui->DecText->setValidator(decValidator);
     ui->BinText->setValidator(binValidator);
