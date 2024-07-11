@@ -7,7 +7,7 @@ CalcTool::CalcTool(Ui::DevCalcWindow *ui, QObject *parent)
     this->hexOriTextArr = {"0", "", ""};
     this->decOriTextArr = {"0", "", ""};
     this->binOriTextArr = {"0", "", ""};
-    this->validOp = {'+', '-', '*', '/', '^', '&', '|', '!', '>', '<', '~'};
+    this->validOp = {'+', '-', '*', '/', '^', '&', '|', '!', '>', '<', '~', '%'};
     this->ctConfigs.insert("hex", {{ { "base", "16" }, { "delimiterLen", "4" }, { "delimiterChar", " " }, { "prefix", "0x" } , { "fixLen", "8" } }});
     this->ctConfigs.insert("dec", {{ { "base", "10" }, { "delimiterLen", "3" }, { "delimiterChar", "," }, { "prefix", "" }, { "fixLen", "0" }  }});
     this->ctConfigs.insert("bin", {{ { "base", "2" }, { "delimiterLen", "4" }, { "delimiterChar", " " }, { "prefix", "0b" }, { "fixLen", "32" }  }});

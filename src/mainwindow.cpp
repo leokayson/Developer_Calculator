@@ -32,9 +32,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
-    QRegExpValidator *hexValidator = new QRegExpValidator(*new QRegExp("[(0x)0-9A-Fa-f+\\-*/><&!^~| ]+"), this);
-    QRegExpValidator *decValidator = new QRegExpValidator(*new QRegExp("[0-9+\\-*/><&!^~|,]+"), this);
-    QRegExpValidator *binValidator = new QRegExpValidator(*new QRegExp("[(0b)01+\\-*/><&!^~| ]+"), this);
+    QRegExpValidator *hexValidator = new QRegExpValidator(*new QRegExp("[(0x)0-9A-Fa-f+\\-*/><&!^~%| ]+"), this);
+    QRegExpValidator *decValidator = new QRegExpValidator(*new QRegExp("[0-9+\\-*/><&!^~%|,]+"), this);
+    QRegExpValidator *binValidator = new QRegExpValidator(*new QRegExp("[(0b)01+\\-*/><&!^~%| ]+"), this);
     ui->HexText->setValidator(hexValidator);
     ui->DecText->setValidator(decValidator);
     ui->BinText->setValidator(binValidator);

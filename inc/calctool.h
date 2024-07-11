@@ -42,7 +42,7 @@ private:
     std::array<QString, 3> decOriTextArr;
     std::array<QString, 3> binOriTextArr;
     QHash<QString, QHash<QString, QString>> ctConfigs;
-    std::array<QChar, 11> validOp;
+    QVector<QChar> validOp;
 
 };
 

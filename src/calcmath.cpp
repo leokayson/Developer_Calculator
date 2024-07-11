@@ -75,6 +75,10 @@ QString CalcMath::calculate(const QString &num1, const QString &num2,
         res = std::pow(numL1, numL2);
         break;
     }
+    case((ushort)'%'): {
+        res = numL1 % numL2;
+        break;
+    }
     defualt: {
         return("ERROR");
     }
