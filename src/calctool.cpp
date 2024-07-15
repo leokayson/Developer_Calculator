@@ -121,10 +121,8 @@ void CalcTool::calculateOutput() {
     qDebug() << "Calculate output triggered!";
 #endif
     updating = true;
-    QChar opt = decOriTextArr[1] == "" ? '+' : decOriTextArr[1].at(0);
-    QString num1 = decOriTextArr[0] == "" ? "0" : decOriTextArr[0];
-    QString num2 = decOriTextArr[2] == "" ? "0" : decOriTextArr[2];
-    QString res = CalcMath::calculate(num1, num2, opt);
+    QString formula = decOriTextArr[0] + decOriTextArr[1] + decOriTextArr[2];
+    QString res = QString::number(CalcMath::calculate(formula.toStdString()), 10);
 
     hexOriTextArr = {CalcMath::baseConversion(res, 10, 16), "", ""};
     decOriTextArr = {res, "", ""};

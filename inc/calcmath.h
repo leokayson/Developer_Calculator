@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QDebug>
+#include <QStack>
 #include "calctool.h"
 #include "math.h"
 #include "proj_conf.h"
@@ -14,7 +15,8 @@ public:
 
 public slots:
     static QString baseConversion(const QString &num, int ori_base, int new_base);
-    static QString calculate(const QString &num1, const QString &num2, QChar opt);
+    static int binary_calculate(const qlonglong num1, const qlonglong num2, QChar opt);
+    static int calculate(const std::string &formula);
 };
 
 #endif // CALCMATH_H

@@ -16,19 +16,10 @@ QString CalcMath::baseConversion(const QString &num, int ori_base,
     return QString::number(ori_num, new_base);
 }
 
-QString CalcMath::calculate(const QString &num1, const QString &num2,
+int CalcMath::binary_calculate(const qlonglong num1, const qlonglong num2,
                             QChar opt) {
     bool ok = true;
     qlonglong numL1 = 0, numL2 = 0, res = 0;
-
-    numL1 = num1.toLongLong(&ok, 10);
-    if (!ok) {
-        return "ERROR";
-    }
-    numL2 = num2.toLongLong(&ok, 10);
-    if (!ok) {
-        return "ERROR";
-    }
 
     switch(opt.unicode()) {
     case((ushort)'+'): {
@@ -80,8 +71,51 @@ QString CalcMath::calculate(const QString &num1, const QString &num2,
         break;
     }
     defualt: {
-        return("ERROR");
+        return(-1);
     }
     }
-    return QString::number(res, 10);
+    return res;
+}
+
+int CalcMath::calculate(const std::string &f) {
+    QStack<qlonglong> nums;               // stack to store numbers
+    QStack<QChar> ops;              // stack to store operators
+    int num = 0;
+    char op = '+';                  // start with '+' to handle the first number
+
+    for (size_t i = 0; i <= f.size(); ++i) {
+        char c = (i < f.size()) ? f[i] : '\0';  // to handle the last number
+        if (isdigit(c)) {
+            num = num * 10 + (c - '0');
+        } else if (c == '(') {
+            int j = i, braces = 1;
+            while (braces > 0) {
+                ++i;
+                if (f[i] == '(') ++braces;
+                if (f[i] == ')') --braces;
+            }
+            num = calculate(f.substr(j + 1, i - j - 1));
+        } else if (!isdigit(c) || i == f.size()) {
+            if (op == '+') {
+                nums.push(num);
+            } else if (op == '-') {
+                nums.push(-num);
+            } else {
+                qlonglong bin_res = binary_calculate(nums.top(), num, op);
+                nums.pop();
+                nums.push(bin_res);
+            }
+            num = 0;
+            op = c;
+        }
+    }
+
+    int res = 0;
+
+    while (!nums.empty()) {
+        res += nums.top();
+        nums.pop();
+    }
+
+    return res;
 }
