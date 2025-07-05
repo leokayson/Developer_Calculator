@@ -1,20 +1,31 @@
 #ifndef CALCMATH_H
 #define CALCMATH_H
 
-#include <QString>
 #include <QDebug>
-#include "calctool.h"
+#include <QStack>
+#include <QString>
 #include "math.h"
-#include "proj_conf.h"
 
-class CalcMath
-{
+typedef unsigned long long uint64_t;
+
+class CalcMath {
+private:
+    static QString dec2Bin( quint64 num );
+    static QString dec2Hex( quint64 num );
+
 public:
     CalcMath();
 
 public slots:
-    static QString baseConversion(const QString &num, int ori_base, int new_base);
-    static QString calculate(const QString &num1, const QString &num2, QChar opt);
+    static bool is_hex_char( QChar c );
+    static bool is_dec_char( QChar c );
+    static bool is_bin_char( QChar c );
+    static QString baseConversion( const QString &num, int ori_base, int new_base );
+    static QString decEvaluate(        const QString &expression );
+    static QString DecExpr2HexExpr( const QString &dec_expr );
+    static QString DecExpr2BinExpr( const QString &dec_expr );
+    static QString HexExpr2DecExpr( const QString &hex_expr );
+    static QString BinExpr2DecExpr( const QString &bin_expr );
 };
 
-#endif // CALCMATH_H
+#endif  // CALCMATH_H

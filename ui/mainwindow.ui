@@ -308,7 +308,7 @@ QLineEdit:hover
    </property>
    <widget class="QMenu" name="menuDeveloper">
     <property name="title">
-     <string>Calculator for SW Developer -- Developed by Kayson</string>
+     <string>Calculator for Embedded SW</string>
     </property>
    </widget>
    <addaction name="menuDeveloper"/>

@@ -74,4 +74,8 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 *.py
+*.cache
+.clang-format
+/*.cpp
+/.vscode
 
